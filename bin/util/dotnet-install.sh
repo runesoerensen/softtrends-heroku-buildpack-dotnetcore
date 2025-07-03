@@ -602,7 +602,7 @@ copy_files_or_dirs_from_list() {
             if [[ "$osname" == "linux-musl" ]]; then
                 printf -- "-u";
             else
-                printf -- "-n";
+                printf -- "--update=none";
             fi
         fi)
 
@@ -655,7 +655,7 @@ download() {
     local out_path="${2:-}"
 
     if [[ "$remote_path" != "http"* ]]; then
-        cp "$remote_path" "$out_path"
+        cp "$remote_path" "$out_path" 2>/dev/null
         return $?
     fi
 
